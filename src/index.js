@@ -24,9 +24,11 @@ function updateCountriesListMarkup(countries) {
  export default {updateCountriesMarkup, updateCountriesListMarkup };
 
 function inputCountry() {
-    fetchCountries(refs.input.value).then(data => markupCountry(data))
-    
-};
+    fetchCountries(refs.input.value)
+    .then(data => markupCountry(data))
+    .catch(error => toastr.error(error.messaage))
+}
+  
 
 function markupCountry(data) {
     clearC()
@@ -36,7 +38,7 @@ function markupCountry(data) {
     }
     if (data.length > 1 && data.length <= 10) {
       updateCountriesListMarkup(data);
-      toastr.clear();
+      // toastr.clear();
       return;
     }
     if (data.length === 1) {
@@ -47,4 +49,5 @@ function markupCountry(data) {
 }
 
 function clearC() {
-  refs.countriesList.innerHTML = ''};
+  refs.countriesList.innerHTML = ''
+};
